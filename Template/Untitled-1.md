@@ -10,9 +10,9 @@ There should be whitespace between paragraphs.
 
 There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
 
-# About Me
+# Header 1
 
-With 9+ years experience in transportation and aviation, currently completing Google Cybersecurity Professional Certificate. Experienced in risk identification, Python, SQL. Seeking a cybersecurity role with opportunities for continuous learning, risk management, and cooperation among colleagues.
+This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
 
 ## Header 2
 
