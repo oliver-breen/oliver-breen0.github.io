@@ -10,12 +10,15 @@ With 9+ years experience in transportation and aviation, currently completing Go
 
 ## Skills 
 
-**Tools/Languages**: Linux, Windows, SQL, Splunk, WireShark, Tcpdump, Suricata, Python, ChatGPT, Salesforce, Tableau
-**Security Practices**: Information Security, Network Security, Vulnerability Assessment, Threat Analysis, Log Analysis, Security Frameworks and Controls
-**Software Platforms**: Google Workspace, Slack, MS Office
-**Strengths**: Problem-Solving, Collaboration, Attention to Detail, Calmness Under Pressure, Intellectual Curiosity, Analytical Mindset
+>**Tools/Languages**: Linux, Windows, SQL, Splunk, WireShark, Tcpdump, Suricata, Python, ChatGPT, Salesforce, Tableau
 
-## CYBERSECURITY PROJECTS
+>**Security Practices**: Information Security, Network Security, Vulnerability Assessment, Threat Analysis, Log Analysis, Security Frameworks and Controls
+
+>**Software Platforms**: Google Workspace, Slack, MS Office
+
+>**Strengths**: Problem-Solving, Collaboration, Attention to Detail, Calmness Under Pressure, Intellectual Curiosity, Analytical Mindset
+
+## Cybersecurity Projects
 
 **TryHackMe Rooms**: Utilized interactive, gamified virtual environment to enhance practical knowledge and hands-on skills:
 
