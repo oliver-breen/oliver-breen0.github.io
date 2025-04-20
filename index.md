@@ -32,6 +32,9 @@ With 9+ years experience in transportation and aviation, currently completing Go
 
 >**Splunk Basics**, **Incident Handling with Splunk**, and **Splunk** (2 & 3) - Developed skills in navigating Splunk; conducting incident handling using Splunk; participated in the Boss of the SOC investigation for security analysis 
 
+<iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4472017" style='border:none;'></iframe>
+
+
 ## Header 2
 
 > This is a blockquote following a header.
