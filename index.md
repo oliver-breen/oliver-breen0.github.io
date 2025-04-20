@@ -2,17 +2,27 @@
 layout: default
 ---
 
-Text can be **bold**, _italic_, ~~strikethrough~~ or `keyword`.
-
 [Link to LinkedIn](http://www.linkedin.com/in/oliver-breen-450a3058)
-
-There should be whitespace between paragraphs.
-
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
 
 # About Me
 
 With 9+ years experience in transportation and aviation, currently completing Google Cybersecurity Professional Certificate. Experienced in risk identification, Python, SQL. Seeking a cybersecurity role with opportunities for continuous learning, risk management, and cooperation among colleagues.
+
+## Skills 
+
+**Tools/Languages**: Linux, Windows, SQL, Splunk, WireShark, Tcpdump, Suricata, Python, ChatGPT, Salesforce, Tableau
+**Security Practices**: Information Security, Network Security, Vulnerability Assessment, Threat Analysis, Log Analysis, Security Frameworks and Controls
+**Software Platforms**: Google Workspace, Slack, MS Office
+**Strengths**: Problem-Solving, Collaboration, Attention to Detail, Calmness Under Pressure, Intellectual Curiosity, Analytical Mindset
+
+## CYBERSECURITY PROJECTS
+
+**TryHackMe Rooms**: Utilized interactive, gamified virtual environment to enhance practical knowledge and hands-on skills:
+>**Linux Fundamentals** (1, 2, & 3) and **Linux Strength Training** - Navigated directories and files, adjusted permissions, analyzed logs, explored common utilities
+>**Intro to Logs** and **Log Analysis** - Identified log types, located logs, employed regular expressions (RegEx), and utilized command line and CyberChef for effective log analysis
+>**Wireshark Basics** and **Wireshark 101** - Gained proficiency in packet dissection, navigation, and filtering techniques; analyzed ARP, ICMP, TCP, DNS, HTTP, and HTTPS traffic for network troubleshooting and security analysis
+>**Windows Fundamentals** (1, 2, & 3) and **Windows Forensics** (1 & 2) - Acquired fundamental understanding of Windows, including file systems, user account control (UAC), control panel, system configuration, security, firewall, registry, and FAT/NTFS file systems; developed skills in accessing hives, utilizing registry explorer, and recovering files 
+>**Splunk Basics**, **Incident Handling with Splunk**, and **Splunk** (2 & 3) - Developed skills in navigating Splunk; conducting incident handling using Splunk; participated in the Boss of the SOC investigation for security analysis 
 
 ## Header 2
 
