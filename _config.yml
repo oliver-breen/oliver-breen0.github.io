@@ -5,5 +5,20 @@ show_downloads: true
 google_analytics:
 theme: jekyll-theme-minimal
 remote_theme: pages-themes/midnight@v0.2.0
+
+# Security and SEO plugins
 plugins:
 - jekyll-remote-theme
+- jekyll-sitemap
+- jekyll-seo-tag
+
+# Security configurations
+strict_front_matter: true
+liquid:
+  error_mode: strict
+  strict_filters: true
+  strict_variables: true
+
+# URL and site security
+url: "https://oliver-breen.github.io"
+enforce_ssl: true

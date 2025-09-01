@@ -1,8 +1,10 @@
 ---
 layout: default
+title: Oliver Breen - Cybersecurity Professional
+description: Cybersecurity professional with 9+ years experience in transportation and aviation, showcasing skills in risk management, Python, SQL, and security frameworks.
 ---
 
-[Link to LinkedIn](http://www.linkedin.com/in/oliver-breen-450a3058)
+[Link to LinkedIn](https://www.linkedin.com/in/oliver-breen-450a3058)
 
 # About Me
 
@@ -32,22 +34,28 @@ With 9+ years experience in transportation and aviation, currently completing Go
 
 >**Splunk Basics**, **Incident Handling with Splunk**, and **Splunk** (2 & 3) - Developed skills in navigating Splunk; conducting incident handling using Splunk; participated in the Boss of the SOC investigation for security analysis 
 
-<iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4472017" style='border:none;'></iframe>
+<iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4472017" style='border:none;' title="TryHackMe Profile Badge" loading="lazy"></iframe>
 
-**HacktheBox**: Uitilized gamified labs and walkthoughs for a real world simulation approach and hands on skill:
+**HacktheBox**: Utilized gamified labs and walkthroughs for a real world simulation approach and hands on skill:
 
 >**HacktheBox Academy** 
 
 >**HacktheBox Labs** Tier 1 and some retired labs 
 
+## Portfolio Security
 
-## Header 2
+This portfolio demonstrates security best practices including:
+- ✅ Regular dependency security auditing
+- ✅ Secure CI/CD pipeline with minimal permissions
+- ✅ HTTPS enforcement and secure configurations
+- ✅ Privacy-conscious information sharing
+- ✅ Professional vulnerability disclosure process
 
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
+---
 
-### Header 3
+## Additional Sections
+
+### Technical Examples
 
 ```js
 // Javascript code with syntax highlighting.
@@ -64,87 +72,24 @@ GitHubPages::Dependencies.gems.each do |gem, version|
 end
 ```
 
-#### Header 4
+### Project Structure
 
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
+*   Cybersecurity skill demonstrations
+*   Professional portfolio showcase
+*   Security-first development approach
 
-##### Header 5
+### Certifications and Learning
 
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
+1.  Google Cybersecurity Professional Certificate (In Progress)
+2.  TryHackMe practical labs and challenges
+3.  HackTheBox hands-on security training
 
-###### Header 6
+| Platform     | Focus Area           | Status |
+|:-------------|:---------------------|:-------|
+| TryHackMe    | Practical Skills     | Active |
+| HackTheBox   | Advanced Labs        | Active |
+| Google Cert  | Professional Dev     | In Progress |
 
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
+---
 
-### There's a horizontal rule below this.
-
-* * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Small image
-
-![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
-
-### Large image
-
-![Branching](https://guides.github.com/activities/hello-world/branching.png)
-
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
-
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
-
-```
-The final element.
-```
+*Portfolio last updated: 2024 | Maintained with security best practices*

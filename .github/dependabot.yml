@@ -1,0 +1,28 @@
+# Dependabot configuration for automated dependency updates
+version: 2
+updates:
+  # Update GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      time: "02:00"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "oliver-breen"
+    
+  # Update Bundler dependencies  
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      time: "02:00"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "oliver-breen"
+    # Ignore patch-level updates to reduce noise
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
