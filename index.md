@@ -6,11 +6,12 @@ layout: default
 
 # About Me
 
-With 9+ years experience in transportation and aviation, currently completing Google Cybersecurity Professional Certificate. Experienced in risk identification, Python, SQL. Seeking a cybersecurity role with opportunities for continuous learning, risk management, and cooperation among colleagues.
+With 9+ years experience in transportation and aviation, currently completing a **Bachelor's Degree of Science in Cybersecurity from Colorado State University - Global Campus**. Experienced in risk identification, Python, SQL. Seeking a cybersecurity role with opportunities for continuous learning, risk management, and cooperation among colleagues.
 
 ## Skills 
+>**Certificates**: Currently working on CompTIA's Security+, effectively completed CompTIA's A+ and Network+ via coursework from CSU Global. 
 
->**Tools/Languages**: Linux, Windows, SQL, Splunk, WireShark, Tcpdump, Suricata, Python, ChatGPT, Salesforce, Tableau
+>**Tools/Languages**: Linux, Windows, SQL, Splunk, Github, WireShark, Tcpdump, Suricata, Python, ChatGPT, Salesforce, Tableau
 
 >**Security Practices**: Information Security, Network Security, Vulnerability Assessment, Threat Analysis, Log Analysis, Security Frameworks and Controls
 
