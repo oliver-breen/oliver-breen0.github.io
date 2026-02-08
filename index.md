@@ -21,7 +21,9 @@ With 9+ years experience in transportation and aviation, currently completing a 
 
 ## Cybersecurity Projects
 
-**TryHackMe Rooms**: Utilized interactive, gamified virtual environment to enhance practical knowledge and hands-on skills:
+>**Home Lab**: personally created test environment, for handss on practical use
+
+>**TryHackMe Rooms**: Utilized interactive, gamified virtual environment to enhance practical knowledge and hands-on skills:
 
 >**Linux Fundamentals** (1, 2, & 3) and **Linux Strength Training** - Navigated directories and files, adjusted permissions, analyzed logs, explored common utilities
 
@@ -41,6 +43,6 @@ With 9+ years experience in transportation and aviation, currently completing a 
 
 <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4472017" style='border:none;'></iframe>
 
-### Credentials
+## Credentials
 <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="915571e0-9131-4cce-8dcd-e6d11112a3b7" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
 
