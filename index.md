@@ -49,21 +49,7 @@ With 9+ years experience in transportation and aviation, currently completing a 
 > When something is important enough, you do it even if the odds are not in your favor.
 
 ### Header 3
-
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
-
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
+<div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="915571e0-9131-4cce-8dcd-e6d11112a3b7" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
 
 #### Header 4
 
