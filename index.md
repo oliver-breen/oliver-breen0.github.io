@@ -33,22 +33,15 @@ With 9+ years experience in transportation and aviation, currently completing a 
 
 >**Splunk Basics**, **Incident Handling with Splunk**, and **Splunk** (2 & 3) - Developed skills in navigating Splunk; conducting incident handling using Splunk; participated in the Boss of the SOC investigation for security analysis 
 
-<iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4472017" style='border:none;'></iframe>
-
-**HacktheBox**: Uitilized gamified labs and walkthoughs for a real world simulation approach and hands on skill:
+>**HacktheBox**: Uitilized gamified labs and walkthoughs for a real world simulation approach and hands on skill
 
 >**HacktheBox Academy** 
 
 >**HacktheBox Labs** Tier 1 and some retired labs 
 
+<iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4472017" style='border:none;'></iframe>
 
-## Header 2
-
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
-
-### Header 3
+### Credentials
 <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="915571e0-9131-4cce-8dcd-e6d11112a3b7" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
 
 #### Header 4
