@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TryHackMe Splunk rooms walkthrough and guide">
+    <title>TryHackMe Splunk Walkthrough - Oliver Breen</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">Oliver Breen</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="../../index.html#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="../../blog.html" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="../../index.html#contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="http://www.linkedin.com/in/oliver-breen-450a3058" class="nav-link" target="_blank">LinkedIn</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="post-container">
+        <article class="section">
+            <header class="post-header">
+                <h1 class="post-title">TryHackMe Splunk Walkthrough</h1>
+                <p class="post-meta">Published on February 5, 2026</p>
+            </header>
+
+            <div class="post-content">
+                <p>Splunk is one of the most powerful SIEM (Security Information and Event Management) platforms used in cybersecurity. TryHackMe offers excellent rooms to learn Splunk, from basics to advanced incident handling. This walkthrough covers my journey through these rooms and the valuable lessons I learned.</p>
+
+                <h2>Introduction to Splunk</h2>
+                <p>Before diving into the rooms, it's important to understand what Splunk is and why it's so valuable in cybersecurity:</p>
+                <ul>
+                    <li><strong>Log Aggregation:</strong> Collects logs from multiple sources in one place</li>
+                    <li><strong>Search and Analysis:</strong> Powerful search language to query massive datasets</li>
+                    <li><strong>Visualization:</strong> Create dashboards and reports for monitoring</li>
+                    <li><strong>Alerting:</strong> Set up automated alerts for suspicious activity</li>
+                    <li><strong>Correlation:</strong> Connect events across different systems and time periods</li>
+                </ul>
+
+                <h2>Room 1: Splunk Basics</h2>
+                <p>The Splunk Basics room introduces the fundamentals of the platform.</p>
+
+                <h3>Key Concepts Learned</h3>
+                <ul>
+                    <li><strong>Splunk Architecture:</strong> Understanding indexers, forwarders, and search heads</li>
+                    <li><strong>Data Ingestion:</strong> How data flows into Splunk</li>
+                    <li><strong>Index Management:</strong> Organizing data for efficient searching</li>
+                    <li><strong>Search Interface:</strong> Navigating the Splunk web interface</li>
+                </ul>
+
+                <h3>Basic Search Syntax</h3>
+                <p>The Search Processing Language (SPL) is at the heart of Splunk. Here are the fundamentals:</p>
+
+                <h4>Simple Searches</h4>
+                <pre><code>index=main
+index=main sourcetype=access_combined
+index=main status=404</code></pre>
+
+                <h4>Time Ranges</h4>
+                <pre><code>index=main earliest=-24h
+index=main earliest=-7d@d latest=@d</code></pre>
+
+                <h4>Boolean Operators</h4>
+                <pre><code>index=main (status=404 OR status=500)
+index=main status=200 NOT user=admin
+index=main error AND critical</code></pre>
+
+                <h2>Key Commands and Searches</h2>
+
+                <h3>Statistical Commands</h3>
+
+                <h4>stats - Statistical Calculations</h4>
+                <pre><code>index=main | stats count by status
+index=main | stats avg(response_time) by host
+index=main | stats dc(user) as unique_users</code></pre>
+
+                <h4>top - Most Common Values</h4>
+                <pre><code>index=main | top src_ip limit=10
+index=main | top user showperc=true</code></pre>
+
+                <h4>rare - Least Common Values</h4>
+                <pre><code>index=main | rare dest_ip
+index=main | rare user_agent limit=5</code></pre>
+
+                <h3>Filtering and Transformation</h3>
+
+                <h4>fields - Select Specific Fields</h4>
+                <pre><code>index=main | fields src_ip, dest_ip, action
+index=main | fields - _raw</code></pre>
+
+                <h4>table - Display Results in Table Format</h4>
+                <pre><code>index=main | table _time, src_ip, dest_ip, bytes
+index=main | table user, action, status | sort -_time</code></pre>
+
+                <h4>eval - Create New Fields</h4>
+                <pre><code>index=main | eval bandwidth_MB=bytes/1024/1024
+index=main | eval hour=strftime(_time, "%H")
+index=main | eval risk_level=if(status=500, "high", "low")</code></pre>
+
+                <h3>Time-Based Analysis</h3>
+
+                <h4>timechart - Events Over Time</h4>
+                <pre><code>index=main | timechart count by status
+index=main | timechart span=1h avg(response_time)
+index=main | timechart count by user limit=5</code></pre>
+
+                <h4>bucket - Group Events by Time</h4>
+                <pre><code>index=main | bucket _time span=1h | stats count by _time
+index=main | bucket _time span=15m | stats sum(bytes) by _time</code></pre>
+
+                <h2>Room 2: Incident Handling with Splunk</h2>
+                <p>This room simulates a real-world security incident investigation.</p>
+
+                <h3>Scenario Overview</h3>
+                <p>You're a SOC analyst investigating suspicious activity in the network. Your goals are to:</p>
+                <ul>
+                    <li>Identify the initial compromise vector</li>
+                    <li>Determine what actions the attacker took</li>
+                    <li>Find indicators of compromise (IOCs)</li>
+                    <li>Assess the scope of the breach</li>
+                </ul>
+
+                <h3>Investigation Methodology</h3>
+
+                <h4>Step 1: Establish a Timeline</h4>
+                <pre><code>index=* | timechart count by sourcetype
+index=* earliest=-24h | stats count by host, sourcetype</code></pre>
+
+                <h4>Step 2: Identify Anomalies</h4>
+                <pre><code>index=web | rare user_agent
+index=network | top src_ip limit=20
+index=auth | search action=failed | stats count by user</code></pre>
+
+                <h4>Step 3: Deep Dive on Suspicious Activity</h4>
+                <pre><code>index=web src_ip=10.10.10.50 | table _time, uri, status, bytes
+index=network dest_port=4444 | table _time, src_ip, dest_ip, bytes
+index=auth user=compromised_user | table _time, action, src_ip</code></pre>
+
+                <h4>Step 4: Correlate Events</h4>
+                <pre><code>index=* src_ip=10.10.10.50 OR dest_ip=10.10.10.50 
+| table _time, sourcetype, src_ip, dest_ip, action
+| sort _time</code></pre>
+
+                <h3>Common Attack Patterns</h3>
+
+                <h4>Brute Force Detection</h4>
+                <pre><code>index=auth action=failed 
+| stats count by src_ip, user 
+| where count > 5
+| sort -count</code></pre>
+
+                <h4>SQL Injection Attempts</h4>
+                <pre><code>index=web (uri="*UNION*" OR uri="*SELECT*" OR uri="*DROP*")
+| table _time, src_ip, uri, status</code></pre>
+
+                <h4>Data Exfiltration</h4>
+                <pre><code>index=network dest_port!=80 AND dest_port!=443 
+| stats sum(bytes) as total_bytes by src_ip, dest_ip 
+| where total_bytes > 100000000
+| sort -total_bytes</code></pre>
+
+                <h4>Malicious Downloads</h4>
+                <pre><code>index=web (*.exe OR *.dll OR *.ps1) 
+| table _time, src_ip, uri, bytes</code></pre>
+
+                <h2>Room 3: Boss of the SOC (BOTS)</h2>
+                <p>The Boss of the SOC challenges present complex, realistic scenarios that test your analytical skills.</p>
+
+                <h3>Challenge Approach</h3>
+                <ol>
+                    <li><strong>Read the Scenario Carefully:</strong> Understand what you're investigating</li>
+                    <li><strong>Identify Key Data Sources:</strong> Know which indexes contain relevant data</li>
+                    <li><strong>Start Broad, Then Narrow:</strong> Begin with general queries, then focus</li>
+                    <li><strong>Follow the Evidence:</strong> Let the data guide your investigation</li>
+                    <li><strong>Document Everything:</strong> Keep notes on your findings and queries</li>
+                </ol>
+
+                <h3>Advanced Techniques</h3>
+
+                <h4>Transaction Command</h4>
+                <p>Group related events together:</p>
+                <pre><code>index=web | transaction user maxpause=5m
+| table user, duration, eventcount</code></pre>
+
+                <h4>Subsearches</h4>
+                <p>Use results from one search in another:</p>
+                <pre><code>index=network src_ip=[search index=auth action=failed 
+| stats count by src_ip | where count > 10 | fields src_ip]</code></pre>
+
+                <h4>Lookups</h4>
+                <p>Enrich data with external information:</p>
+                <pre><code>index=network | lookup malicious_ips.csv ip as src_ip 
+OUTPUT threat_level | where threat_level="high"</code></pre>
+
+                <h4>Custom Alerts</h4>
+                <p>Create alerts for real-time monitoring:</p>
+                <pre><code>index=auth action=failed 
+| stats count by user, src_ip 
+| where count > 5
+| eval alert_message="Possible brute force: ".user." from ".src_ip</code></pre>
+
+                <h2>Practical Tips for Splunk Investigations</h2>
+
+                <h3>Performance Optimization</h3>
+                <ul>
+                    <li>Use specific index and sourcetype to limit search scope</li>
+                    <li>Use time ranges appropriately—don't search "All time" unless necessary</li>
+                    <li>Filter early in the pipeline with <code>where</code> or <code>search</code></li>
+                    <li>Use <code>stats</code> and <code>chart</code> commands to reduce result size</li>
+                    <li>Leverage <code>fields</code> command to limit returned data</li>
+                </ul>
+
+                <h3>Best Practices</h3>
+                <ul>
+                    <li><strong>Save Useful Searches:</strong> Create a library of common queries</li>
+                    <li><strong>Use Comments:</strong> Add <code>```comments```</code> to complex searches</li>
+                    <li><strong>Build Incrementally:</strong> Test each part of your search pipeline</li>
+                    <li><strong>Validate Results:</strong> Always verify your findings make sense</li>
+                    <li><strong>Create Dashboards:</strong> Visualize key metrics for monitoring</li>
+                </ul>
+
+                <h3>Common Mistakes to Avoid</h3>
+                <ul>
+                    <li>Not specifying an index—searches all indexes, very slow</li>
+                    <li>Using wildcards at the beginning of searches (<code>*something</code>)</li>
+                    <li>Forgetting to escape special characters</li>
+                    <li>Not considering time zones in timestamp analysis</li>
+                    <li>Overlooking case sensitivity in field values</li>
+                </ul>
+
+                <h2>Lessons Learned</h2>
+
+                <h3>Technical Skills</h3>
+                <ul>
+                    <li><strong>SPL Mastery:</strong> The search language becomes second nature with practice</li>
+                    <li><strong>Pattern Recognition:</strong> Learning to spot anomalies in data</li>
+                    <li><strong>Correlation Skills:</strong> Connecting events across different log sources</li>
+                    <li><strong>Visualization:</strong> Creating meaningful dashboards and charts</li>
+                </ul>
+
+                <h3>Analytical Skills</h3>
+                <ul>
+                    <li><strong>Hypothesis-Driven Investigation:</strong> Form theories and test them</li>
+                    <li><strong>Critical Thinking:</strong> Question results and verify findings</li>
+                    <li><strong>Documentation:</strong> Record your process and findings</li>
+                    <li><strong>Persistence:</strong> Complex investigations require methodical effort</li>
+                </ul>
+
+                <h2>Resources for Further Learning</h2>
+                <ul>
+                    <li><strong>Splunk Documentation:</strong> Comprehensive official documentation</li>
+                    <li><strong>Boss of the SOC Dataset:</strong> Practice with real-world datasets</li>
+                    <li><strong>Splunk Free:</strong> Download and install for home lab practice</li>
+                    <li><strong>YouTube Tutorials:</strong> Many channels cover Splunk techniques</li>
+                    <li><strong>Splunk Fundamentals Certification:</strong> Free online course</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+                <p>The TryHackMe Splunk rooms provided an excellent foundation in SIEM analysis and incident investigation. The hands-on approach, combined with realistic scenarios, made the learning both engaging and practical.</p>
+
+                <p>Splunk is an incredibly powerful tool, but it's not just about knowing the commands—it's about developing an investigative mindset. Learning to ask the right questions, follow the evidence, and tell the story of what happened is what makes a great SOC analyst.</p>
+
+                <p>If you're pursuing a career in cybersecurity, particularly in SOC or incident response roles, I highly recommend working through these rooms. The skills you'll develop are directly applicable to real-world security operations.</p>
+
+                <p>In my next post, I'll cover packet analysis with Wireshark, another essential skill for security professionals.</p>
+            </div>
+
+            <a href="../../blog.html" class="back-to-blog">← Back to Blog</a>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Oliver Breen. All rights reserved. | Cybersecurity Portfolio</p>
+    </footer>
+</body>
+</html>
