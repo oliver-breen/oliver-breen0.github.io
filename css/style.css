@@ -1,18 +1,20 @@
 :root {
-    --primary-blue: #2563eb;
-    --primary-blue-dark: #1e40af;
-    --primary-blue-light: #3b82f6;
-    --secondary-blue: #60a5fa;
-    --accent-blue: #93c5fd;
-    --background-light: #f8fafc;
-    --background-white: #ffffff;
-    --text-primary: #1e293b;
-    --text-secondary: #475569;
-    --text-light: #64748b;
-    --border-color: #e2e8f0;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --neon-cyan: #00fff9;
+    --neon-pink: #ff006e;
+    --neon-purple: #9d4edd;
+    --neon-blue: #3a86ff;
+    --neon-green: #39ff14;
+    --background-dark: #0a0a0f;
+    --background-card: #1a1a2e;
+    --background-section: #16213e;
+    --text-primary: #ffffff;
+    --text-secondary: #b8c1ec;
+    --text-accent: #00fff9;
+    --border-neon: #00fff9;
+    --shadow-neon-cyan: 0 0 10px rgba(0, 255, 249, 0.5), 0 0 20px rgba(0, 255, 249, 0.3);
+    --shadow-neon-pink: 0 0 10px rgba(255, 0, 110, 0.5), 0 0 20px rgba(255, 0, 110, 0.3);
+    --shadow-neon-purple: 0 0 10px rgba(157, 78, 221, 0.5), 0 0 20px rgba(157, 78, 221, 0.3);
+    --shadow-card: 0 4px 6px rgba(0, 255, 249, 0.1), 0 0 20px rgba(0, 255, 249, 0.05);
     --transition: all 0.3s ease;
 }
 
@@ -26,16 +28,22 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
     color: var(--text-primary);
-    background-color: var(--background-light);
+    background-color: var(--background-dark);
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(157, 78, 221, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 255, 249, 0.1) 0%, transparent 50%);
+    background-attachment: fixed;
 }
 
 /* Navigation */
 .navbar {
-    background-color: var(--background-white);
-    box-shadow: var(--shadow-md);
+    background-color: var(--background-card);
+    box-shadow: var(--shadow-card);
+    border-bottom: 1px solid var(--neon-cyan);
     position: sticky;
     top: 0;
     z-index: 1000;
+    backdrop-filter: blur(10px);
 }
 
 .nav-container {
@@ -50,13 +58,15 @@ body {
 .nav-logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--primary-blue);
+    color: var(--neon-cyan);
     text-decoration: none;
     transition: var(--transition);
+    text-shadow: var(--shadow-neon-cyan);
 }
 
 .nav-logo:hover {
-    color: var(--primary-blue-dark);
+    color: var(--neon-pink);
+    text-shadow: var(--shadow-neon-pink);
 }
 
 .nav-menu {
@@ -80,12 +90,14 @@ body {
     height: 2px;
     bottom: -5px;
     left: 0;
-    background-color: var(--primary-blue);
+    background-color: var(--neon-cyan);
+    box-shadow: var(--shadow-neon-cyan);
     transition: width 0.3s ease;
 }
 
 .nav-link:hover {
-    color: var(--primary-blue);
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px rgba(0, 255, 249, 0.6);
 }
 
 .nav-link:hover::after {
@@ -100,11 +112,12 @@ body {
 }
 
 .section {
-    background-color: var(--background-white);
+    background-color: var(--background-card);
     border-radius: 12px;
     padding: 2.5rem;
     margin-bottom: 2rem;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(0, 255, 249, 0.2);
     animation: fadeInUp 0.6s ease;
 }
 
@@ -121,10 +134,11 @@ body {
 
 .section-title {
     font-size: 2rem;
-    color: var(--primary-blue);
+    color: var(--neon-cyan);
     margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
-    border-bottom: 3px solid var(--primary-blue);
+    border-bottom: 3px solid var(--neon-cyan);
+    text-shadow: var(--shadow-neon-cyan);
 }
 
 .about-text {
@@ -144,8 +158,9 @@ body {
 
 .skills-category-title {
     font-size: 1.25rem;
-    color: var(--primary-blue-dark);
+    color: var(--neon-pink);
     margin-bottom: 1rem;
+    text-shadow: 0 0 8px rgba(255, 0, 110, 0.4);
 }
 
 .skills-tags {
@@ -156,10 +171,11 @@ body {
 
 .skill-tag {
     display: inline-block;
-    background-color: var(--accent-blue);
-    color: var(--primary-blue-dark);
+    background: linear-gradient(135deg, var(--background-section), var(--background-card));
+    color: var(--neon-cyan);
     padding: 0.5rem 1rem;
     border-radius: 20px;
+    border: 1px solid var(--neon-cyan);
     font-size: 0.9rem;
     font-weight: 500;
     transition: var(--transition);
@@ -167,38 +183,42 @@ body {
 }
 
 .skill-tag:hover {
-    background-color: var(--primary-blue);
-    color: white;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+    color: var(--background-dark);
+    border-color: var(--neon-pink);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-neon-cyan);
 }
 
 .skills-note {
     font-size: 0.875rem;
-    color: var(--text-light);
+    color: var(--text-secondary);
     margin-top: 0.5rem;
     font-style: italic;
 }
 
 /* Projects Section */
 .project-card {
-    background-color: var(--background-light);
-    border-left: 4px solid var(--primary-blue);
+    background-color: var(--background-section);
+    border-left: 4px solid var(--neon-pink);
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     border-radius: 8px;
     transition: var(--transition);
+    box-shadow: 0 2px 8px rgba(255, 0, 110, 0.1);
 }
 
 .project-card:hover {
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-neon-pink);
     transform: translateX(5px);
+    border-left-color: var(--neon-cyan);
 }
 
 .project-title {
     font-size: 1.5rem;
-    color: var(--primary-blue-dark);
+    color: var(--neon-purple);
     margin-bottom: 0.75rem;
+    text-shadow: 0 0 8px rgba(157, 78, 221, 0.4);
 }
 
 .project-description {
@@ -251,18 +271,20 @@ body {
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background-color: var(--primary-blue);
-    color: white;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+    color: var(--background-dark);
     text-decoration: none;
     border-radius: 8px;
     font-weight: 600;
     transition: var(--transition);
+    border: 2px solid var(--neon-cyan);
 }
 
 .contact-link:hover {
-    background-color: var(--primary-blue-dark);
+    background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+    border-color: var(--neon-pink);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-neon-pink);
 }
 
 .contact-icon {
@@ -272,11 +294,13 @@ body {
 
 /* Footer */
 .footer {
-    background-color: var(--primary-blue-dark);
-    color: white;
+    background: linear-gradient(135deg, var(--background-section), var(--background-card));
+    color: var(--text-primary);
     text-align: center;
     padding: 2rem;
     margin-top: 3rem;
+    border-top: 2px solid var(--neon-cyan);
+    box-shadow: 0 -4px 20px rgba(0, 255, 249, 0.1);
 }
 
 /* Blog Specific Styles */
@@ -298,29 +322,32 @@ body {
 }
 
 .blog-post-card {
-    background-color: var(--background-white);
+    background-color: var(--background-card);
     border-radius: 12px;
     padding: 2rem;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(0, 255, 249, 0.2);
     transition: var(--transition);
     animation: fadeInUp 0.6s ease;
 }
 
 .blog-post-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-neon-cyan);
+    border-color: var(--neon-cyan);
 }
 
 .blog-post-date {
-    color: var(--text-light);
+    color: var(--text-secondary);
     font-size: 0.875rem;
     margin-bottom: 0.5rem;
 }
 
 .blog-post-title {
     font-size: 1.5rem;
-    color: var(--primary-blue-dark);
+    color: var(--neon-purple);
     margin-bottom: 1rem;
+    text-shadow: 0 0 8px rgba(157, 78, 221, 0.4);
 }
 
 .blog-post-title a {
@@ -330,7 +357,8 @@ body {
 }
 
 .blog-post-title a:hover {
-    color: var(--primary-blue);
+    color: var(--neon-cyan);
+    text-shadow: var(--shadow-neon-cyan);
 }
 
 .blog-post-excerpt {
@@ -341,15 +369,16 @@ body {
 
 .read-more {
     display: inline-block;
-    color: var(--primary-blue);
+    color: var(--neon-cyan);
     font-weight: 600;
     text-decoration: none;
     transition: var(--transition);
 }
 
 .read-more:hover {
-    color: var(--primary-blue-dark);
+    color: var(--neon-pink);
     text-decoration: underline;
+    text-shadow: 0 0 8px rgba(255, 0, 110, 0.6);
 }
 
 /* Blog Post Page Styles */
@@ -366,35 +395,39 @@ body {
 
 .post-title {
     font-size: 2.5rem;
-    color: var(--primary-blue-dark);
+    color: var(--neon-cyan);
     margin-bottom: 0.5rem;
+    text-shadow: var(--shadow-neon-cyan);
 }
 
 .post-meta {
-    color: var(--text-light);
+    color: var(--text-secondary);
     font-size: 1rem;
 }
 
 .post-content {
-    background-color: var(--background-white);
+    background-color: var(--background-card);
     border-radius: 12px;
     padding: 2.5rem;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(0, 255, 249, 0.2);
     line-height: 1.8;
 }
 
 .post-content h2 {
     font-size: 1.75rem;
-    color: var(--primary-blue-dark);
+    color: var(--neon-purple);
     margin-top: 2rem;
     margin-bottom: 1rem;
+    text-shadow: 0 0 8px rgba(157, 78, 221, 0.4);
 }
 
 .post-content h3 {
     font-size: 1.5rem;
-    color: var(--primary-blue);
+    color: var(--neon-pink);
     margin-top: 1.5rem;
     margin-bottom: 0.75rem;
+    text-shadow: 0 0 8px rgba(255, 0, 110, 0.4);
 }
 
 .post-content h4 {
@@ -421,21 +454,24 @@ body {
 }
 
 .post-content code {
-    background-color: var(--background-light);
+    background-color: var(--background-section);
     padding: 0.2rem 0.4rem;
     border-radius: 4px;
+    border: 1px solid var(--neon-cyan);
     font-family: 'Courier New', monospace;
     font-size: 0.9em;
-    color: var(--primary-blue-dark);
+    color: var(--neon-cyan);
 }
 
 .post-content pre {
-    background-color: var(--text-primary);
-    color: #f8fafc;
+    background-color: var(--background-section);
+    color: var(--text-primary);
     padding: 1rem;
     border-radius: 8px;
+    border: 1px solid var(--neon-purple);
     overflow-x: auto;
     margin-bottom: 1rem;
+    box-shadow: 0 0 10px rgba(157, 78, 221, 0.2);
 }
 
 .post-content pre code {
@@ -448,16 +484,19 @@ body {
     display: inline-block;
     margin-top: 2rem;
     padding: 0.75rem 1.5rem;
-    background-color: var(--primary-blue);
-    color: white;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+    color: var(--background-dark);
     text-decoration: none;
     border-radius: 8px;
+    border: 2px solid var(--neon-cyan);
     font-weight: 600;
     transition: var(--transition);
 }
 
 .back-to-blog:hover {
-    background-color: var(--primary-blue-dark);
+    background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+    border-color: var(--neon-pink);
+    box-shadow: var(--shadow-neon-pink);
 }
 
 /* Responsive Design */
