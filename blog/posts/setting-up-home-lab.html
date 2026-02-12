@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete guide to setting up a cybersecurity home lab">
+    <title>Setting Up a Cybersecurity Home Lab - Oliver Breen</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">Oliver Breen</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="../../index.html#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="../../blog.html" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="../../index.html#contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="http://www.linkedin.com/in/oliver-breen-450a3058" class="nav-link" target="_blank">LinkedIn</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="post-container">
+        <article class="section">
+            <header class="post-header">
+                <h1 class="post-title">Setting Up a Cybersecurity Home Lab</h1>
+                <p class="post-meta">Published on February 8, 2026</p>
+            </header>
+
+            <div class="post-content">
+                <p>Building a cybersecurity home lab is one of the most valuable investments you can make in your security education. It provides a safe, controlled environment to practice techniques, test tools, and develop practical skills without risking production systems.</p>
+
+                <h2>Why Build a Home Lab?</h2>
+                <p>A home lab offers several key advantages:</p>
+                <ul>
+                    <li><strong>Hands-On Practice:</strong> Theory is important, but practical experience is essential</li>
+                    <li><strong>Safe Environment:</strong> Experiment freely without consequences</li>
+                    <li><strong>Cost-Effective:</strong> Many tools are free or open-source</li>
+                    <li><strong>Portfolio Building:</strong> Document your work to showcase to employers</li>
+                    <li><strong>Flexible Learning:</strong> Work at your own pace and focus on areas of interest</li>
+                </ul>
+
+                <h2>Required Hardware</h2>
+                <p>You don't need enterprise-grade equipment to build an effective home lab. Here's what I recommend:</p>
+
+                <h3>Minimum Requirements</h3>
+                <ul>
+                    <li><strong>Computer:</strong> Desktop or laptop with at least 8GB RAM (16GB+ recommended)</li>
+                    <li><strong>Processor:</strong> Multi-core CPU with virtualization support (Intel VT-x or AMD-V)</li>
+                    <li><strong>Storage:</strong> 250GB+ SSD for faster VM performance</li>
+                    <li><strong>Network:</strong> Wired or wireless connection with a router</li>
+                </ul>
+
+                <h3>Recommended Setup</h3>
+                <ul>
+                    <li><strong>RAM:</strong> 16-32GB for running multiple VMs simultaneously</li>
+                    <li><strong>Storage:</strong> 500GB+ SSD for VM storage and snapshots</li>
+                    <li><strong>Network:</strong> Dedicated switch or VLAN capability for network isolation</li>
+                    <li><strong>Optional:</strong> Raspberry Pi for dedicated services (DNS, monitoring)</li>
+                </ul>
+
+                <h2>Essential Software</h2>
+
+                <h3>Hypervisor Options</h3>
+                <p>Choose a virtualization platform to run your VMs:</p>
+                <ul>
+                    <li><strong>VirtualBox:</strong> Free, cross-platform, great for beginners</li>
+                    <li><strong>VMware Workstation Player:</strong> Free for personal use, excellent performance</li>
+                    <li><strong>VMware ESXi:</strong> Enterprise-grade, free version available</li>
+                    <li><strong>Proxmox:</strong> Open-source, powerful web interface</li>
+                </ul>
+
+                <p>I use <strong>VirtualBox</strong> because it's free, well-documented, and runs on Windows, Mac, and Linux.</p>
+
+                <h3>Operating Systems</h3>
+                <p>Download and set up these operating systems:</p>
+                <ul>
+                    <li><strong>Kali Linux:</strong> Pre-loaded with penetration testing tools</li>
+                    <li><strong>Ubuntu/Debian:</strong> For general Linux practice and server hosting</li>
+                    <li><strong>Windows 10/11:</strong> Use evaluation versions for testing</li>
+                    <li><strong>Windows Server:</strong> For Active Directory and enterprise scenarios</li>
+                    <li><strong>Security Onion:</strong> Network security monitoring distribution</li>
+                </ul>
+
+                <h2>Virtual Machine Setup</h2>
+
+                <h3>Step 1: Install Your Hypervisor</h3>
+                <ol>
+                    <li>Download VirtualBox from <code>virtualbox.org</code></li>
+                    <li>Install with default settings</li>
+                    <li>Install the Extension Pack for additional features</li>
+                    <li>Verify virtualization is enabled in BIOS</li>
+                </ol>
+
+                <h3>Step 2: Create Your First VM</h3>
+                <ol>
+                    <li>Download Kali Linux ISO from <code>kali.org</code></li>
+                    <li>In VirtualBox, click "New" to create a VM</li>
+                    <li>Allocate at least 2GB RAM (4GB+ recommended)</li>
+                    <li>Create a virtual hard disk (40GB+)</li>
+                    <li>Attach the Kali Linux ISO</li>
+                    <li>Start the VM and follow installation prompts</li>
+                </ol>
+
+                <h3>Step 3: Take Snapshots</h3>
+                <p>Before making changes, always take a snapshot:</p>
+                <ul>
+                    <li>Click "Take Snapshot" in VirtualBox</li>
+                    <li>Name it descriptively (e.g., "Fresh Install - Pre-Config")</li>
+                    <li>Revert if something breaks during testing</li>
+                </ul>
+
+                <h2>Network Configuration</h2>
+
+                <h3>Network Modes</h3>
+                <p>Understanding VirtualBox network modes:</p>
+                <ul>
+                    <li><strong>NAT:</strong> VM can access internet, isolated from host</li>
+                    <li><strong>Bridged:</strong> VM gets IP on your home network</li>
+                    <li><strong>Internal Network:</strong> VMs communicate with each other only</li>
+                    <li><strong>Host-Only:</strong> VM and host communicate, no external access</li>
+                </ul>
+
+                <h3>Recommended Lab Network</h3>
+                <ol>
+                    <li>Create an Internal Network named "LabNet"</li>
+                    <li>Connect all VMs to LabNet</li>
+                    <li>Set up one VM as a router/gateway with NAT</li>
+                    <li>This isolates your lab from your home network</li>
+                </ol>
+
+                <h2>Security Tools Installation</h2>
+
+                <h3>Network Analysis</h3>
+                <ul>
+                    <li><strong>Wireshark:</strong> Packet capture and analysis</li>
+                    <li><strong>tcpdump:</strong> Command-line packet analyzer</li>
+                    <li><strong>NetworkMiner:</strong> Network forensics tool</li>
+                </ul>
+
+                <h3>Intrusion Detection</h3>
+                <ul>
+                    <li><strong>Snort:</strong> Network intrusion detection system</li>
+                    <li><strong>Suricata:</strong> High-performance IDS/IPS</li>
+                    <li><strong>Zeek (Bro):</strong> Network security monitor</li>
+                </ul>
+
+                <h3>SIEM and Log Analysis</h3>
+                <ul>
+                    <li><strong>Splunk Free:</strong> Up to 500MB/day indexing</li>
+                    <li><strong>ELK Stack:</strong> Elasticsearch, Logstash, Kibana</li>
+                    <li><strong>Graylog:</strong> Open-source log management</li>
+                </ul>
+
+                <h3>Vulnerability Scanning</h3>
+                <ul>
+                    <li><strong>Nmap:</strong> Network discovery and scanning</li>
+                    <li><strong>OpenVAS:</strong> Full-featured vulnerability scanner</li>
+                    <li><strong>Nikto:</strong> Web server scanner</li>
+                </ul>
+
+                <h2>Lab Scenarios and Exercises</h2>
+
+                <h3>Beginner Projects</h3>
+                <ol>
+                    <li><strong>Basic Network Scanning:</strong> Use Nmap to discover and enumerate VMs</li>
+                    <li><strong>Packet Capture:</strong> Analyze HTTP traffic with Wireshark</li>
+                    <li><strong>Log Collection:</strong> Set up centralized logging with Splunk</li>
+                    <li><strong>File Sharing:</strong> Configure SMB shares between Windows VMs</li>
+                </ol>
+
+                <h3>Intermediate Projects</h3>
+                <ol>
+                    <li><strong>Active Directory Lab:</strong> Set up domain controller and clients</li>
+                    <li><strong>IDS Deployment:</strong> Install Suricata and generate alerts</li>
+                    <li><strong>Web Application Testing:</strong> Deploy DVWA or WebGoat</li>
+                    <li><strong>Incident Response:</strong> Simulate attacks and investigate</li>
+                </ol>
+
+                <h3>Advanced Projects</h3>
+                <ol>
+                    <li><strong>Red vs. Blue Team:</strong> Simulate attacks and defend</li>
+                    <li><strong>SIEM Correlation:</strong> Create custom Splunk detection rules</li>
+                    <li><strong>Network Segmentation:</strong> Implement VLANs and firewall rules</li>
+                    <li><strong>Malware Analysis:</strong> Set up isolated environment for sample analysis</li>
+                </ol>
+
+                <h2>Best Practices</h2>
+
+                <h3>Organization</h3>
+                <ul>
+                    <li>Name VMs clearly (e.g., "Lab-Kali-Main", "Lab-Win10-Client01")</li>
+                    <li>Document your network diagram and IP addressing scheme</li>
+                    <li>Keep notes on configurations and findings</li>
+                    <li>Use version control for scripts and configurations</li>
+                </ul>
+
+                <h3>Security</h3>
+                <ul>
+                    <li>Never connect vulnerable VMs directly to the internet</li>
+                    <li>Use network isolation to protect your home network</li>
+                    <li>Change default passwords on all systems</li>
+                    <li>Regularly update your VMs and tools</li>
+                    <li>Don't use your lab for production tasks</li>
+                </ul>
+
+                <h3>Resource Management</h3>
+                <ul>
+                    <li>Don't run all VMs at once—start only what you need</li>
+                    <li>Power off or suspend idle VMs to free resources</li>
+                    <li>Use snapshots wisely to manage disk space</li>
+                    <li>Clean up old VMs and snapshots periodically</li>
+                </ul>
+
+                <h2>Learning Resources</h2>
+                <p>Enhance your lab with these resources:</p>
+                <ul>
+                    <li><strong>TryHackMe:</strong> Guided labs and learning paths</li>
+                    <li><strong>HackTheBox:</strong> Challenge-based learning</li>
+                    <li><strong>SANS Cyber Aces:</strong> Free tutorials on core security topics</li>
+                    <li><strong>Cybrary:</strong> Free and paid cybersecurity courses</li>
+                    <li><strong>VulnHub:</strong> Downloadable vulnerable VMs for practice</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+                <p>Building a home lab is an ongoing process. Start simple with a basic setup, then gradually add complexity as you learn and grow. The key is to practice consistently and document your findings.</p>
+
+                <p>Remember: the goal isn't to build the perfect lab immediately. It's to create a learning environment where you can safely experiment, make mistakes, and develop real-world skills that will serve you throughout your cybersecurity career.</p>
+
+                <p>In my next posts, I'll dive deeper into specific tools and techniques you can practice in your home lab. Stay tuned!</p>
+            </div>
+
+            <a href="../../blog.html" class="back-to-blog">← Back to Blog</a>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Oliver Breen. All rights reserved. | Cybersecurity Portfolio</p>
+    </footer>
+</body>
+</html>

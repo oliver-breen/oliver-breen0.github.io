@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete guide to packet analysis with Wireshark">
+    <title>Wireshark Packet Analysis Guide - Oliver Breen</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">Oliver Breen</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="../../index.html#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="../../blog.html" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="../../index.html#contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="http://www.linkedin.com/in/oliver-breen-450a3058" class="nav-link" target="_blank">LinkedIn</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="post-container">
+        <article class="section">
+            <header class="post-header">
+                <h1 class="post-title">Wireshark Packet Analysis Guide</h1>
+                <p class="post-meta">Published on February 1, 2026</p>
+            </header>
+
+            <div class="post-content">
+                <p>Wireshark is the world's foremost network protocol analyzer. Whether you're troubleshooting network issues, analyzing security incidents, or learning about network protocols, Wireshark is an essential tool. This guide covers everything from basics to advanced packet analysis techniques.</p>
+
+                <h2>Getting Started with Wireshark</h2>
+
+                <h3>What is Wireshark?</h3>
+                <p>Wireshark is a free, open-source packet analyzer that lets you capture and interactively browse network traffic. It's available for Windows, macOS, and Linux.</p>
+
+                <h3>Key Features</h3>
+                <ul>
+                    <li><strong>Live Capture:</strong> Capture packets in real-time from network interfaces</li>
+                    <li><strong>Deep Inspection:</strong> Examine hundreds of protocols at the packet level</li>
+                    <li><strong>Rich Display Filters:</strong> Powerful filtering to find specific packets</li>
+                    <li><strong>Protocol Dissection:</strong> Automatic protocol analysis and decoding</li>
+                    <li><strong>Export Options:</strong> Save captures in various formats</li>
+                    <li><strong>Statistics:</strong> Generate network statistics and graphs</li>
+                </ul>
+
+                <h3>Interface Overview</h3>
+                <ul>
+                    <li><strong>Packet List Pane:</strong> Summary of captured packets</li>
+                    <li><strong>Packet Details Pane:</strong> Detailed protocol tree of selected packet</li>
+                    <li><strong>Packet Bytes Pane:</strong> Raw hexadecimal and ASCII data</li>
+                    <li><strong>Display Filter Bar:</strong> Filter visible packets</li>
+                    <li><strong>Capture Filter:</strong> Filter what gets captured</li>
+                </ul>
+
+                <h2>Common Network Protocols</h2>
+
+                <h3>ARP (Address Resolution Protocol)</h3>
+                <p>ARP maps IP addresses to MAC addresses on local networks.</p>
+
+                <h4>Normal ARP Traffic</h4>
+                <ul>
+                    <li><strong>ARP Request:</strong> "Who has IP address X.X.X.X?"</li>
+                    <li><strong>ARP Reply:</strong> "I have X.X.X.X, my MAC is YY:YY:YY:YY:YY:YY"</li>
+                </ul>
+
+                <h4>Display Filter</h4>
+                <pre><code>arp</code></pre>
+
+                <h4>Suspicious Patterns</h4>
+                <ul>
+                    <li>Excessive ARP requests from a single source (scanning)</li>
+                    <li>Gratuitous ARP broadcasts (potential spoofing)</li>
+                    <li>ARP replies with duplicate IP addresses</li>
+                </ul>
+
+                <h3>ICMP (Internet Control Message Protocol)</h3>
+                <p>ICMP is used for network diagnostics and error reporting (ping, traceroute).</p>
+
+                <h4>Common ICMP Types</h4>
+                <ul>
+                    <li><strong>Type 8:</strong> Echo Request (ping)</li>
+                    <li><strong>Type 0:</strong> Echo Reply</li>
+                    <li><strong>Type 3:</strong> Destination Unreachable</li>
+                    <li><strong>Type 11:</strong> Time Exceeded</li>
+                </ul>
+
+                <h4>Display Filter</h4>
+                <pre><code>icmp
+icmp.type == 8
+icmp.type == 0</code></pre>
+
+                <h4>Suspicious Patterns</h4>
+                <ul>
+                    <li>Large ICMP packets (potential covert channel)</li>
+                    <li>Unusual ICMP types or codes</li>
+                    <li>ICMP tunneling (data exfiltration)</li>
+                </ul>
+
+                <h3>TCP (Transmission Control Protocol)</h3>
+                <p>TCP is a connection-oriented protocol providing reliable, ordered delivery.</p>
+
+                <h4>TCP Three-Way Handshake</h4>
+                <ol>
+                    <li><strong>SYN:</strong> Client initiates connection</li>
+                    <li><strong>SYN-ACK:</strong> Server acknowledges and responds</li>
+                    <li><strong>ACK:</strong> Client acknowledges, connection established</li>
+                </ol>
+
+                <h4>TCP Flags</h4>
+                <ul>
+                    <li><strong>SYN:</strong> Synchronize sequence numbers</li>
+                    <li><strong>ACK:</strong> Acknowledgment</li>
+                    <li><strong>FIN:</strong> Finish, close connection</li>
+                    <li><strong>RST:</strong> Reset connection</li>
+                    <li><strong>PSH:</strong> Push data immediately</li>
+                    <li><strong>URG:</strong> Urgent data</li>
+                </ul>
+
+                <h4>Display Filters</h4>
+                <pre><code>tcp
+tcp.port == 80
+tcp.flags.syn == 1
+tcp.flags.reset == 1
+tcp.analysis.retransmission</code></pre>
+
+                <h4>Suspicious Patterns</h4>
+                <ul>
+                    <li>SYN floods (many SYN packets without completion)</li>
+                    <li>Excessive retransmissions (network issues or DoS)</li>
+                    <li>Connections to unusual ports</li>
+                    <li>Many RST packets (connection problems or scanning)</li>
+                </ul>
+
+                <h3>DNS (Domain Name System)</h3>
+                <p>DNS translates domain names to IP addresses.</p>
+
+                <h4>DNS Query Types</h4>
+                <ul>
+                    <li><strong>A Record:</strong> IPv4 address</li>
+                    <li><strong>AAAA Record:</strong> IPv6 address</li>
+                    <li><strong>MX Record:</strong> Mail server</li>
+                    <li><strong>TXT Record:</strong> Text data</li>
+                    <li><strong>PTR Record:</strong> Reverse lookup</li>
+                </ul>
+
+                <h4>Display Filters</h4>
+                <pre><code>dns
+dns.qry.name contains "example.com"
+dns.flags.response == 0
+dns.flags.response == 1</code></pre>
+
+                <h4>Suspicious Patterns</h4>
+                <ul>
+                    <li>Queries to suspicious or newly registered domains</li>
+                    <li>Excessive DNS queries (potential DGA malware)</li>
+                    <li>DNS tunneling (data exfiltration)</li>
+                    <li>Large TXT records (potential data transfer)</li>
+                </ul>
+
+                <h3>HTTP (Hypertext Transfer Protocol)</h3>
+                <p>HTTP is the foundation of web communication (unencrypted).</p>
+
+                <h4>HTTP Methods</h4>
+                <ul>
+                    <li><strong>GET:</strong> Retrieve data</li>
+                    <li><strong>POST:</strong> Submit data</li>
+                    <li><strong>PUT:</strong> Upload data</li>
+                    <li><strong>DELETE:</strong> Remove resource</li>
+                </ul>
+
+                <h4>Display Filters</h4>
+                <pre><code>http
+http.request
+http.response
+http.request.method == "POST"
+http.response.code == 404
+http contains "password"</code></pre>
+
+                <h4>Suspicious Patterns</h4>
+                <ul>
+                    <li>Credentials in plaintext (GET/POST parameters)</li>
+                    <li>Unusual user agents</li>
+                    <li>SQL injection attempts in URLs</li>
+                    <li>Directory traversal attempts</li>
+                    <li>File uploads with suspicious extensions</li>
+                </ul>
+
+                <h3>HTTPS/TLS (HTTP over SSL/TLS)</h3>
+                <p>HTTPS encrypts HTTP traffic for secure communication.</p>
+
+                <h4>TLS Handshake</h4>
+                <ol>
+                    <li><strong>Client Hello:</strong> Supported cipher suites</li>
+                    <li><strong>Server Hello:</strong> Chosen cipher suite</li>
+                    <li><strong>Certificate:</strong> Server authentication</li>
+                    <li><strong>Key Exchange:</strong> Establish session keys</li>
+                    <li><strong>Encrypted Data:</strong> Secure communication begins</li>
+                </ol>
+
+                <h4>Display Filters</h4>
+                <pre><code>tls
+tls.handshake.type == 1
+ssl.handshake.extensions_server_name
+tls.record.version</code></pre>
+
+                <h4>Analysis Points</h4>
+                <ul>
+                    <li>Certificate validity and chain</li>
+                    <li>TLS version (TLS 1.2/1.3 recommended)</li>
+                    <li>Cipher suite strength</li>
+                    <li>Server Name Indication (SNI)</li>
+                </ul>
+
+                <h2>Filtering Techniques</h2>
+
+                <h3>Basic Display Filters</h3>
+
+                <h4>By Protocol</h4>
+                <pre><code>http
+tcp
+udp
+dns
+arp</code></pre>
+
+                <h4>By IP Address</h4>
+                <pre><code>ip.addr == 192.168.1.100
+ip.src == 10.0.0.5
+ip.dst == 172.16.0.1
+ip.addr == 192.168.1.0/24</code></pre>
+
+                <h4>By Port</h4>
+                <pre><code>tcp.port == 443
+udp.port == 53
+tcp.dstport == 80
+tcp.srcport == 12345</code></pre>
+
+                <h3>Logical Operators</h3>
+                <pre><code>http && ip.addr == 192.168.1.100
+tcp.port == 80 || tcp.port == 443
+!(arp || icmp)
+http && ip.src == 10.0.0.5 && tcp.port == 8080</code></pre>
+
+                <h3>Advanced Filters</h3>
+
+                <h4>Content Matching</h4>
+                <pre><code>http contains "password"
+tcp contains "admin"
+frame contains "malware"</code></pre>
+
+                <h4>Length Filters</h4>
+                <pre><code>frame.len > 1000
+tcp.len < 100
+ip.len == 1500</code></pre>
+
+                <h4>Time-Based Filters</h4>
+                <pre><code>frame.time >= "2026-02-01 10:00:00"
+frame.time_relative > 5</code></pre>
+
+                <h3>Useful Filter Combinations</h3>
+
+                <h4>Web Traffic Analysis</h4>
+                <pre><code>(http.request || tls.handshake.type == 1) && ip.src == 192.168.1.100</code></pre>
+
+                <h4>Suspicious Connections</h4>
+                <pre><code>tcp.flags.syn == 1 && tcp.flags.ack == 0 && tcp.dstport > 1024</code></pre>
+
+                <h4>Failed Connections</h4>
+                <pre><code>tcp.flags.reset == 1 || icmp.type == 3</code></pre>
+
+                <h4>Large Transfers</h4>
+                <pre><code>tcp.len > 1400 && tcp.dstport == 443</code></pre>
+
+                <h2>Identifying Suspicious Traffic</h2>
+
+                <h3>Port Scanning Detection</h3>
+                <ul>
+                    <li>Many SYN packets to different ports from same source</li>
+                    <li>Sequential port numbers being probed</li>
+                    <li>Short time intervals between connection attempts</li>
+                </ul>
+
+                <h4>Filter Example</h4>
+                <pre><code>tcp.flags.syn == 1 && tcp.flags.ack == 0</code></pre>
+
+                <h3>Brute Force Attacks</h3>
+                <ul>
+                    <li>Repeated connection attempts to same service</li>
+                    <li>Multiple failed authentication attempts</li>
+                    <li>Look for protocols: SSH (22), FTP (21), HTTP (80/443)</li>
+                </ul>
+
+                <h4>Filter Example</h4>
+                <pre><code>tcp.port == 22 && tcp.flags.syn == 1</code></pre>
+
+                <h3>Data Exfiltration</h3>
+                <ul>
+                    <li>Unusually large outbound transfers</li>
+                    <li>Connections to unknown external IPs</li>
+                    <li>DNS tunneling (large TXT queries/responses)</li>
+                    <li>ICMP tunneling (large payload sizes)</li>
+                </ul>
+
+                <h4>Filter Example</h4>
+                <pre><code>ip.src == 192.168.1.0/24 && frame.len > 1000 && !(tcp.port == 80 || tcp.port == 443)</code></pre>
+
+                <h3>Malware Communication</h3>
+                <ul>
+                    <li>Connections to known malicious IPs</li>
+                    <li>Unusual protocol usage</li>
+                    <li>Beaconing (regular, periodic connections)</li>
+                    <li>Encoded or obfuscated data</li>
+                </ul>
+
+                <h2>Real-World Analysis Examples</h2>
+
+                <h3>Example 1: Investigating HTTP Password Exposure</h3>
+                <p><strong>Scenario:</strong> User reports password compromise.</p>
+
+                <p><strong>Analysis Steps:</strong></p>
+                <ol>
+                    <li>Filter HTTP POST requests: <code>http.request.method == "POST"</code></li>
+                    <li>Look for login pages: <code>http.request.uri contains "login"</code></li>
+                    <li>Search for password in content: <code>http contains "password="</code></li>
+                    <li>Identify source IP: Check <code>ip.src</code> field</li>
+                    <li>Track user session: Follow TCP stream</li>
+                </ol>
+
+                <h3>Example 2: DNS Exfiltration Detection</h3>
+                <p><strong>Scenario:</strong> Possible data theft via DNS.</p>
+
+                <p><strong>Analysis Steps:</strong></p>
+                <ol>
+                    <li>Filter DNS queries: <code>dns.flags.response == 0</code></li>
+                    <li>Look for long subdomain names: Check query lengths</li>
+                    <li>Identify unusual domains: Look for random strings</li>
+                    <li>Count queries per domain: Statistics > DNS</li>
+                    <li>Check base64 encoded data in queries</li>
+                </ol>
+
+                <h3>Example 3: Malware Beaconing</h3>
+                <p><strong>Scenario:</strong> Workstation may be compromised.</p>
+
+                <p><strong>Analysis Steps:</strong></p>
+                <ol>
+                    <li>Filter by workstation IP: <code>ip.addr == 192.168.1.50</code></li>
+                    <li>Look for regular intervals: Statistics > IO Graph</li>
+                    <li>Identify destination IPs: Statistics > Endpoints</li>
+                    <li>Check for non-standard ports</li>
+                    <li>Analyze packet contents for C2 communication</li>
+                </ol>
+
+                <h2>Wireshark Tips and Tricks</h2>
+
+                <h3>Following Streams</h3>
+                <p>Right-click a packet → Follow → TCP/UDP/HTTP Stream</p>
+                <p>Shows the entire conversation in readable format.</p>
+
+                <h3>Export Objects</h3>
+                <p>File → Export Objects → HTTP/SMB/TFTP</p>
+                <p>Extract files transferred over the network.</p>
+
+                <h3>Statistics and Graphs</h3>
+                <ul>
+                    <li><strong>Protocol Hierarchy:</strong> Statistics → Protocol Hierarchy</li>
+                    <li><strong>Conversations:</strong> Statistics → Conversations</li>
+                    <li><strong>Endpoints:</strong> Statistics → Endpoints</li>
+                    <li><strong>IO Graph:</strong> Statistics → IO Graph (time-based analysis)</li>
+                </ul>
+
+                <h3>Packet Colorization</h3>
+                <p>View → Coloring Rules</p>
+                <p>Customize packet colors for quick identification.</p>
+
+                <h3>Capture Filters vs Display Filters</h3>
+                <ul>
+                    <li><strong>Capture Filters:</strong> BPF syntax, applied during capture</li>
+                    <li><strong>Display Filters:</strong> Wireshark syntax, applied after capture</li>
+                </ul>
+
+                <h4>Capture Filter Examples</h4>
+                <pre><code>host 192.168.1.100
+port 80
+net 192.168.1.0/24
+tcp and port 443</code></pre>
+
+                <h2>Best Practices</h2>
+
+                <h3>Capture Strategy</h3>
+                <ul>
+                    <li>Use capture filters to limit captured data when possible</li>
+                    <li>Save captures in <code>pcapng</code> format for metadata</li>
+                    <li>Use ring buffer for long-term captures</li>
+                    <li>Document capture circumstances (time, location, purpose)</li>
+                </ul>
+
+                <h3>Analysis Approach</h3>
+                <ul>
+                    <li>Start with protocol hierarchy for overview</li>
+                    <li>Look at conversations and endpoints</li>
+                    <li>Apply filters progressively, not all at once</li>
+                    <li>Save useful filters for reuse</li>
+                    <li>Take notes during analysis</li>
+                </ul>
+
+                <h3>Performance</h3>
+                <ul>
+                    <li>Close unused packet details panes</li>
+                    <li>Disable unneeded protocol dissectors</li>
+                    <li>Use display filters instead of searching</li>
+                    <li>Split large captures into smaller files</li>
+                </ul>
+
+                <h2>Learning Resources</h2>
+                <ul>
+                    <li><strong>Wireshark Documentation:</strong> Official user guide and wiki</li>
+                    <li><strong>Sample Captures:</strong> wiki.wireshark.org/SampleCaptures</li>
+                    <li><strong>Malware Traffic Analysis:</strong> malware-traffic-analysis.net</li>
+                    <li><strong>PacketLife:</strong> Cheat sheets and tutorials</li>
+                    <li><strong>TryHackMe/HackTheBox:</strong> Packet analysis challenges</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+                <p>Wireshark is an incredibly powerful tool that becomes more valuable as you develop your skills. The key is practice—the more captures you analyze, the better you'll become at spotting patterns and anomalies.</p>
+
+                <p>Whether you're troubleshooting network issues, investigating security incidents, or learning about protocols, Wireshark provides unparalleled visibility into network traffic. Combined with a solid understanding of networking fundamentals and common attack patterns, it's an essential tool in any cybersecurity professional's toolkit.</p>
+
+                <p>Keep practicing, stay curious, and remember that every packet tells a story. Your job is to read that story and understand what really happened on the network.</p>
+            </div>
+
+            <a href="../../blog.html" class="back-to-blog">← Back to Blog</a>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Oliver Breen. All rights reserved. | Cybersecurity Portfolio</p>
+    </footer>
+</body>
+</html>
