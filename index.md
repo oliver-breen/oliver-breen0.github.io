@@ -1,8 +1,10 @@
 ---
 layout: default
+title: Oliver Breen - Cybersecurity Professional
+description: Cybersecurity professional with 9+ years experience in transportation and aviation, showcasing skills in risk management, Python, SQL, and security frameworks.
 ---
 
-[Link to LinkedIn](http://www.linkedin.com/in/oliver-breen-450a3058)
+[Link to LinkedIn](https://www.linkedin.com/in/oliver-breen-450a3058)
 
 # About Me
 
@@ -41,7 +43,6 @@ With 9+ years experience in transportation and aviation, currently completing a 
 
 >**HacktheBox Labs** Tier 1 and some retired labs 
 
-<iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4472017" style='border:none;'></iframe>
 
 ## Credentials
 <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="915571e0-9131-4cce-8dcd-e6d11112a3b7" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>

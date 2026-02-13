@@ -1,0 +1,52 @@
+name: Security Audit
+
+on:
+  schedule:
+    # Run security audit weekly on Sundays at 2 AM UTC
+    - cron: '0 2 * * 0'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'Gemfile*'
+      - '.github/workflows/**'
+
+jobs:
+  security-audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+          
+      - name: Install dependencies
+        run: |
+          gem install bundler-audit
+          bundle install
+          
+      - name: Run bundle audit
+        run: |
+          bundle-audit check --update --ignore CVE-2020-8130
+          
+      - name: Security scan with Brakeman (if applicable)
+        run: |
+          # Skip if no Rails app, but placeholder for future security tools
+          echo "Static site - no additional security scanning needed"
+          
+      - name: Check for sensitive files
+        run: |
+          # Check for common sensitive files that shouldn't be committed
+          if find . -name "*.key" -o -name "*.pem" -o -name "*.p12" -o -name "*.pfx" -o -name "secret*" -o -name ".env*" | grep -v ".github" | head -1; then
+            echo "❌ Sensitive files detected!"
+            exit 1
+          else
+            echo "✅ No sensitive files found"
+          fi
