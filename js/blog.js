@@ -48,7 +48,7 @@ function displayBlogPosts() {
     blogPosts.forEach((post, index) => {
         const postCard = document.createElement('div');
         postCard.className = 'blog-post-card';
-        postCard.style.animationDelay = `${index * 0.1}s`;
+        postCard.style.animationDelay = `${index * 0.10}s`;
         
         postCard.innerHTML = `
             <div class="blog-post-date">${post.date}</div>
